@@ -93,7 +93,7 @@ export function LoginForm() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      router.push("/dashboard");
+      window.location.href = "https://ehsan.42web.io/ESW/";
     } catch (error) {
       const authError = error as AuthError;
       toast({
@@ -110,7 +110,7 @@ export function LoginForm() {
     setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
-      router.push("/dashboard");
+      window.location.href = "https://ehsan.42web.io/ESW/";
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An unexpected error occurred. Please try again.";
@@ -144,7 +144,7 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-sm border-white/20 bg-card/30 shadow-2xl backdrop-blur-lg dark:bg-card/10">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">Ehsan login page</CardTitle>
+        <CardTitle className="text-3xl font-bold">ehsan login page</CardTitle>
         <CardDescription>Welcome back! Please login to your account.</CardDescription>
       </CardHeader>
       <CardContent>
