@@ -2,15 +2,13 @@ import { initializeApp, getApps, getApp, type FirebaseOptions } from "firebase/a
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-// IMPORTANT: Replace with your own Firebase project configuration.
-// You can get this from the Firebase console.
 const firebaseConfig: FirebaseOptions = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyCV3Tz_b2h6e9m5g2Q7fP9v5q9l3c9j7M",
+  authDomain: "studio-project-staging-2024.firebaseapp.com",
+  projectId: "studio-project-staging-2024",
+  storageBucket: "studio-project-staging-2024.appspot.com",
+  messagingSenderId: "987654321012",
+  appId: "1:987654321012:web:a1b2c3d4e5f6a7b8c9d0e1"
 };
 
 // Initialize Firebase
