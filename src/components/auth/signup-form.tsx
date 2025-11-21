@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import {
   AuthError,
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { Loader2 } from "lucide-react";
 
@@ -37,12 +37,12 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  password: z.string().min(1, {
-    message: "Password is required.",
+  password: z.string().min(6, {
+    message: "Password must be at least 6 characters.",
   }),
 });
 
-export function LoginForm() {
+export function SignupForm() {
   const router = useRouter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -58,30 +58,32 @@ export function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      router.push("https://ehsan.42web.io/ESW/");
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      toast({
+        title: "Account Created",
+        description: "You have successfully created an account. Please log in.",
+      });
+      router.push("/");
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An unexpected error occurred. Please try again.";
-      
+
       switch (authError.code) {
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-        case "auth/invalid-credential":
-          errorMessage = "Incorrect email or password. Please check your credentials and try again.";
+        case "auth/email-already-in-use":
+          errorMessage = "This email address is already in use.";
           break;
         case "auth/invalid-email":
           errorMessage = "The email address is not valid. Please enter a valid email.";
           break;
-        case "auth/too-many-requests":
-          errorMessage = "Too many failed login attempts. Please try again later.";
+        case "auth/weak-password":
+          errorMessage = "The password is too weak. Please use a stronger password.";
           break;
         default:
           console.error("Firebase Auth Error:", authError);
       }
 
       toast({
-        title: "Login Failed",
+        title: "Sign Up Failed",
         description: errorMessage,
         variant: "destructive",
       });
@@ -93,8 +95,8 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-sm border-white/20 bg-card/30 shadow-2xl backdrop-blur-lg dark:bg-card/10">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">Ehsan Study Website</CardTitle>
-        <CardDescription>Welcome back! Please login to your account.</CardDescription>
+        <CardTitle className="text-3xl font-bold">Create an Account</CardTitle>
+        <CardDescription>Enter your details to get started.</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -138,16 +140,16 @@ export function LoginForm() {
             />
             <Button type="submit" className="w-full transition-all duration-300" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Log In
+              Sign Up
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="justify-center">
         <p className="text-sm text-center">
-          Don't have an account?{' '}
-          <Link href="/signup" className="font-semibold text-primary hover:underline">
-            Sign up
+          Already have an account?{' '}
+          <Link href="/" className="font-semibold text-primary hover:underline">
+            Log in
           </Link>
         </p>
       </CardFooter>
