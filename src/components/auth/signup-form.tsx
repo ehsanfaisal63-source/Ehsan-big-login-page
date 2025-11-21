@@ -93,7 +93,7 @@ export function SignupForm() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      router.push("https://ehsan.42web.io/ESW/");
+      router.push("/dashboard");
     } catch (error) {
       const authError = error as AuthError;
       toast({
