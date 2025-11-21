@@ -93,7 +93,7 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-sm border-white/20 bg-card/30 shadow-2xl backdrop-blur-lg dark:bg-card/10">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">Ehsan Study Website</CardTitle>
+        <CardTitle className="text-3xl font-bold">Ehsan login page</CardTitle>
         <CardDescription>Welcome back! Please login to your account.</CardDescription>
       </CardHeader>
       <CardContent>

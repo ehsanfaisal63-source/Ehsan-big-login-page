@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Ehsan Study Website',
-  description: 'Login to Ehsan Study Website',
+  title: 'Ehsan login page',
+  description: 'Login to Ehsan login page',
 };
 
 export default function RootLayout({
